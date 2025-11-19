@@ -1,7 +1,5 @@
 #!/bin/bash
 rm -rf package/emortal/luci-app-athena-led
-# 去除值守管理
-rm -rf package/emortal/luci-app-athena-led
 
 # Git稀疏克隆，只克隆指定目录到本地
 function git_sparse_clone() {
@@ -18,4 +16,7 @@ chmod +x package/luci-app-athena-led/root/etc/init.d/athena_led package/luci-app
 # 添加momo
 git_sparse_clone main https://github.com/kenzok8/small-package momo luci-app-momo
 #添加chinadns
-git clone -b master https://github.com/izilzty/luci-app-chinadns-ng package/luci-app-chinadns-ng
+git clone --depth=1 https://github.com/izilzty/luci-app-chinadns-ng package/luci-app-chinadns-ng
+
+./scripts/feeds update -a
+./scripts/feeds install -a
